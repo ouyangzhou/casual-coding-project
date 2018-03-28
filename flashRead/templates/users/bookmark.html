@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_block %}
+<p><img src ="{% static 'images/bookmarks.gif' %}" ></p>
+	{% if bookmark %}
+	<ul>
+		{% for chapter in bookmark %}
+		<li><a href="{% url 'chapters:detail' chapter.chid %}">Chapter {{ chapter.chapter_number }}: {{ chapter.title }}</a> &nbsp; <i>Last updated: {{ chapter.date_updated }}</i></li>
+		<form action="{% url 'users:deleteBookmark' chapter.chid %}" method="POST">
+			{% csrf_token %}
+			<input type="submit" class= "btn btn-info" value="Delete!">
+		</form>
+		{% endfor %}
+	</ul>
+	{% else %}
+		<p>No chapters bookmarked yet!</p>
+	{% endif %}
+	
+{% endblock %}

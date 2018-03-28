@@ -1,0 +1,127 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>{% block title %}FlashRead{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+		
+        {% block extra_css %}{% endblock %}
+		<link rel="shortcut icon" href="{% static 'images/masterbearico.ico' %}" >
+    </head>
+
+    <body id = "base">
+	
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="{% static 'javascript/search.js' %}"></script>
+
+	    <header>
+			<div id="top">
+				<a href="{% url 'home:index' %}"><img id="logo" src ="{% static 'images/logo.gif' %}" ></img></a> 
+				<img id="mascot" src="{% static 'images/masterbear.gif' %}"></img> 
+				<img id="cloudbubble" src={% static 'images/cloud_bubble.gif' %}></img> 
+				<marquee id="masterbearspeaks" behavior="scroll" scrollamount="10" direction="left">Welcome to FlashRead! I'm Master Bear! Please read to your heart's content!</marquee>
+				
+				<nav>
+					<ul class = "nav nav-pills">
+						<li><a href="{% url 'home:index' %}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+						<li><a href="{% url 'books:index' %}"><span class="glyphicon glyphicon-book"></span> Books</a></li>
+					
+						{% if user.is_anonymous %}
+						<li><a href="{% url 'users:login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+						{% else %}
+						<li><a href="{% url 'addContent:myWorks' %}"><span class="glyphicon glyphicon-info-sign"></span> My Works</a></li>
+						<li><a href="{% url 'users:profile' %}"><span class="glyphicon glyphicon-user"></span> My Profile</a></li>
+						<li><a href="{% url 'users:favouriteBooks' %}"><span class="glyphicon glyphicon-heart"></span> Favourite Books</a></li>
+						<li><a href="{% url 'users:bookmarkChapters' %}"><span class="glyphicon glyphicon-bookmark"></span> Bookmarks</a></li>
+						<li><a href="{% url 'users:logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+						{% endif %}
+					</ul>
+					
+					<form action="{% url 'books:search' %}" method="POST" style>
+						{% csrf_token %}
+						<div class ="row">
+						<div class ="col-md-6">
+						<table class="table">
+							<tbody>
+								<tr>
+					
+									<td>
+										<label>Search by:</label>
+									</td>
+									
+									<div class = "row">
+										<div class="col-xs-3">
+										<td>
+											<select class = "form-control" name="searchtype" id="searchtype">
+												<option value="bookName" id='otherSearch'>Book Name</option>
+												<option value="author" id='otherSearch'>Author</option>
+												<option value="category" id='category'>Category</option>
+												<option value="genre" id='genre'>Genre</option>
+											</select>
+										</td>
+									
+										<td>
+											<select class = "form-control" name="searchcategoryType" id='searchcategoryType'>
+												<option value="Original">Original</option>
+												<option value="Fan-work">Fan-work</option>
+												<option value="Poem">Poem</option>
+												<option value="Diary">Diary</option>
+												<option value="Short-story">Short-story</option>
+												<option value="Textbook">Textbook</option>
+												<option value="Other">Other</option>
+											</select>
+											<select class = "form-control" name="searchgenre" id='searchgenre'>
+												<option value="Classic">Classic</option>
+												<option value="Adventure">Adventure</option>
+												<option value="Fantasy">Fantasy</option>
+												<option value="Romance">Romance</option>
+												<option value="Sci-fi">Sci-fi</option>
+												<option value="Drama">Drama</option>
+												<option value="Satire">Satire</option>
+												<option value="Mystery">Mystery</option>
+												<option value="Horror">Horror</option>
+												<option value="Guide">Guide</option>
+												<option value="Autobiography">Autobiography</option>
+												<option value="Other">Other</option>
+											</select>
+											<div class="form-group has-feedback">
+												<input type="text" class="form-control" name='searchuserInput' id='searchuserInput' placeholder="Enter search terms here" />
+												<span id = "iconsearch" class="glyphicon glyphicon-search form-control-feedback"></span>
+											</div>
+										</td>
+									
+										</div>
+									</div>
+									<td>
+										<button type="submit" class= "btn btn-info">Go!</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						</div>
+						</div>
+					</form>
+				</nav>
+			</div>
+
+		</header>
+		<!-- readded hr so that header doesn't overlap -->
+		<hr>
+
+
+    
+        {% block body_block %}<p>This is an empty book page.</p>{% endblock %}
+        
+
+
+		<footer>
+			<p><img src={% static 'images/copyright.gif' %}></img><br>
+			Powered by Django.</p>
+		</footer>
+    </body>
+</html>

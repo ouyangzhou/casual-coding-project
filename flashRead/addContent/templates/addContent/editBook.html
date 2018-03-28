@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block extra_css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/addContent.css' %}" />
+{% endblock extra_css %}
+
+{% block body_block %}
+
+<h1>Editing "{{ book.title }}"</h1>
+
+<h3>Work attributes:</h3>
+<p><form method = "POST" style="width:500px"> {% csrf_token %}
+ <fieldset>
+  <div class = "row">
+  <div class="col-xs-4">
+  Title: <br>
+  <input type="text" class = "form-control" name="title" value="{{ book.title }}" required><br><br>
+  Genre:<br>
+  <select class = "form-control" placeholder="Genre" name="genre" required>
+  <option value="Classic" {% if book.genre == "Classic" %} selected{% endif %}>Classic</option>
+  <option value="Adventure" {% if book.genre == "Adventure" %} selected{% endif %}>Adventure</option>
+  <option value="Fantasy" {% if book.genre == "Fantasy" %} selected{% endif %}>Fantasy</option>
+  <option value="Romance" {% if book.genre == "Romance" %} selected{% endif %}>Romance</option>
+  <option value="Sci-fi" {% if book.genre == "Sci-fi" %} selected{% endif %}>Sci-fi</option>
+  <option value="Drama" {% if book.genre == "Drama" %} selected{% endif %}>Drama</option>
+  <option value="Satire" {% if book.genre == "Satire" %} selected{% endif %}>Satire</option>
+  <option value="Mystery" {% if book.genre == "Mystery" %} selected{% endif %}>Mystery</option>
+  <option value="Horror" {% if book.genre == "Horror" %} selected{% endif %}>Horror</option>
+  <option value="Guide" {% if book.genre == "Guide" %} selected{% endif %}>Guide</option>
+  <option value="Autobiography" {% if book.genre == "Autobiography" %} selected{% endif %}>Autobiography</option>
+  <option value="Other" {% if book.genre == "Other" %} selected{% endif %}>Other</option>
+  </select><br>
+  Category: <br>
+  <select class = "form-control" placeholder="Category" name="category" required>
+  <option value="Orginal" {% if book.category == "Orginal" %} selected{% endif %}>Orginal</option>
+  <option value="Fan-work" {% if book.category == "Fan-work" %} selected{% endif %}>Fan-work</option>
+  <option value="Poem" {% if book.category == "Poem" %} selected{% endif %}>Poem</option>
+  <option value="Diary" {% if book.category == "Diary" %} selected{% endif %}>Diary</option>
+  <option value="Short-story" {% if book.category == "Short-story" %} selected{% endif %}>Short-story</option>
+  <option value="Textbook" {% if book.category == "Textbook" %} selected{% endif %}>Textbook</option>
+  <option value="Other" {% if book.category == "Other" %} selected{% endif %}>Other</option>
+  </select><br>
+  Status: <br>
+  <select class = "form-control" placeholder="Status" name="status" required>
+  <option value="Incomplete" {% if book.status == "Incomplete" %} selected{% endif %}>Incomplete</option>
+  <option value="Complete" {% if book.status == "Complete" %} selected{% endif %}>Complete</option>
+  <option value="Hiatus" {% if book.status == "Hiatus" %} selected{% endif %}>Hiatus</option>
+  <option value="Abandoned" {% if book.status == "Abandoned" %} selected{% endif %}>Abandoned</option>
+  </select><br>
+  </div>
+  </div>
+  
+  <div class ="row">
+  <div class="col-xs-12">
+  Abstract: <br>
+  <textarea cols="68" rows="4" class = "form-control" name="abstract">{{ book.abstract }}</textarea><br>
+  </div>
+  </div>
+  <input name="editBook" type="submit" class= "btn btn-info" value="Save Changes"> <input id="deleteBtn" name="deleteBook" type="submit" class= "btn btn-danger" value="Delete Work" style="float:right" onclick="return confirm('Are you sure you want to delete the entire work?')">
+ </fieldset>
+</form></p>
+
+<p><b>Words:</b> {{ book.wordcount }} <br/>
+<b>Hits:</b> {{ book.hits }} <br/>
+<b>Votes:</b> {{ book.votes }} <br/></p>
+
+<p><b>Last updated:</b> {{ book.date_updated }}</p>
+
+<h3>Chapters: </h3>
+{% if chapterList %}
+
+<h4>Click on chapters to edit them: </h4>
+  <ul>
+  {% for chapter in chapterList %}
+    <li><a href="{% url 'addContent:editChapter' book.bid chapter.chid %}">Chapter {{ chapter.chapter_number }}: {{ chapter.title }}</a> &nbsp; <i>Words: {{ chapter.wordcount }}</i> &nbsp; <i>Last updated: {{ chapter.date_updated }}</i></li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p>No chapters so far.</p>
+{% endif %}
+
+<p><a href="{% url 'addContent:addChapter' book.bid %}" class="btn btn-info">Add new chapter</a></p>
+<p><a href="{% url 'addContent:myWorks' %}">Back to My Works</a></p>
+
+{% endblock %}

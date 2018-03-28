@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+	<link rel="stylesheet" type="text/css" href="/static/css/book.css">
+{% endblock extra_css %}
+
+
+{% block title %}
+	{{ chapter.title }}
+{% endblock title %}
+
+{% block body_block %}
+	{% if success %}
+		<p>{{ chapter.title }} has now been bookmarked!<p>
+	{% else %}
+		<p>You have bookmarked this book already!</p>
+	{% endif %}
+	<p><a href='../'>Back to the chapter page</a></p>
+
+{% endblock body_block %}

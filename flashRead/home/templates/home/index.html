@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block extra_css %}
+	<link rel="stylesheet" type="text/css" href="{% static 'home/css/home_style.css' %}" />
+{% endblock extra_css %}
+
+{% block body_block %}
+
+
+
+<div id="col1">
+	<h1>Welcome to FlashRead, the best book reading site ever!</h1>
+
+	<h3>About our site:</h3>
+
+	<p>FlashRead is designed to be a site where everyone can share their writing with the world!<br/>
+	Our goal is to create an easily accessible place for everyone to read.<br/>
+	We are currently in development, but feel free to try our site! <br/>
+	(Please make sure to keep copy of your work in case of data lose due to on-going development.)</p>
+</div>
+
+<div id="col2">
+	<h4><strong>Today's Top Story:</strong></h4>
+	<img id="samplePig" src={% static 'images/samplePig.jpg' %}></img> 
+</div>
+
+{% endblock %}

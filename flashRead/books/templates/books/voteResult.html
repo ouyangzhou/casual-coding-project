@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+	<link rel="stylesheet" type="text/css" href="/static/css/book.css">
+{% endblock extra_css %}
+
+{% block title %}
+	{{ book.title }}
+{% endblock title %}
+
+{% block body_block %}
+{% if success%}
+	<p>You have voted Successfully!</p>
+{% else %}
+	<p>Sorry, you have used up your votes for the day. Come back later.</p>
+{% endif%}
+<p><a href='../'>Back to the book page</a></p>
+<p>Note: this feature should be extended. Voter should also be restricted to only vote once for one book per day. The extended feature can be implemented later</p>
+{% endblock body_block %}
+ 
+
+

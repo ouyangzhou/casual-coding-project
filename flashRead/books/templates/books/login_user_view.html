@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+	<link rel="stylesheet" type="text/css" href="/static/css/book.css">
+{% endblock extra_css %}
+
+
+{% block title %}
+	{{ book.title }}
+{% endblock title %}
+
+{% block body_block %}
+
+<div id="sidebar">
+
+</div>
+{% with book_id=book.id %}
+{% endwith %}
+
+<form action="{% url 'books:vote' book.bid %}" method="POST">
+	{% csrf_token %}
+	<input type="submit" class= "btn btn-info" value="Vote for this book!">
+</form>
+<br>
+<form action="{% url 'books:favourite' book.bid %}" method="POST">
+	{% csrf_token %}
+	<input type="submit" class= "btn btn-info" value="Favourite this book!">
+</form>
+
+
+
+<div id="content">
+	<h1>Title: {{ book.title }}</h1>
+	<ul>
+		<li><b>Author:</b> {{ book.author }}</li>
+		<li><b>Rating:</b> {{ book.votes }}</li>
+		<li><b>Last Updated:</b> {{ book.date_updated }}</li>
+		<li><b>Category:</b> {{ book.category }}</li>
+		<li><b>Genre:</b> {{ book.genre }}</li>
+		<li><b>Hits:</b> {{ book.hits }}</li>
+		<li><b>Word Count:</b> {{ book.wordcount }}</li>
+
+<!-- 
+		warning = models.BooleanField(default=False) # Is it 18+?
+ -->	
+	
+
+	</ul>	
+	<section>
+		<h2>Abstract</h2> 
+		<p>{{ book.abstract }}</p>
+	</section>
+</div>
+
+<div id="chapter">
+	<h2>Chapters</h2>
+	
+	{% if chapter_list %}
+	<ul>
+		{% for chapter in chapter_list %}
+		<li><a href="{% url 'chapters:detail' chapter.chid %}">Chapter {{ chapter.chapter_number }}: {{ chapter.title }}</a> &nbsp; <i>Last updated: {{ chapter.date_updated }}</i></li>
+		{% endfor %}
+	</ul>
+	{% else %}
+		<p>No chapters available</p>
+	{% endif %}
+	
+</div>
+{% endblock body_block %}
+ 
+
+

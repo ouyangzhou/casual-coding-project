@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block extra_css %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/users/form.css' %}" />
+{% endblock extra_css %}
+
+
+{% block body_block %}
+
+<div id="content">
+	<p><img src ="{% static 'images/createnewaccount.gif' %}" ></p>
+
+	<form action="" method="POST">
+		<table class="center">
+			{% csrf_token %}	
+			{{ form }}
+		</table>
+		<input type="submit" value="Create New Account" />
+	</form>
+
+</div>
+{% endblock %}
+
+
+

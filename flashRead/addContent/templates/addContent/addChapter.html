@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block body_block %}
+
+<h1>Adding new chapter to "{{ book.title }}"</h1>
+
+<p><form method = "POST"> {% csrf_token %}
+ <fieldset>
+ <div class = "row">
+ <div class="col-xs-2">
+  Title: <br>
+  <input type="text" class = "form-control" name="title" required><br>
+  Chapter Number: <br>
+  <input type="text" class = "form-control" name="chapter_number" required><br>
+  </div>
+  </div>
+  
+ <div class = "row">
+ <div class="col-xs-5">
+  Content: <br>
+  <textarea cols="150" rows="35" class = "form-control" name="content"></textarea><br>
+  </div>
+  </div>
+  <input type="submit" class= "btn btn-info" value="Add Chapter">
+ </fieldset>
+</form></p>
+
+<p><a href="{% url 'addContent:editBook' book.bid %}">Back to Book Index</a></p>
+<p><a href="{% url 'addContent:myWorks' %}">Back to My Works</a></p>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_block %}
+<p><img src ="{% static 'images/favorites.gif' %}" ></p>
+	{% if favouriteBooks %}
+		<table class = "table" id="bookTable">
+		<thead>
+		<tr>
+			<th>Title</th>
+			<th>Author</th> 
+			<th>Category</th>
+			<th>Genre</th>
+			<th>Rating</th>
+			<th>Hits</th>
+			<th>Word Count</th>
+			<th>Last Updated</th>
+			<th>Status</th>
+			<th>Delete</th>
+		</tr>
+	</thead>
+		{% for book in favouriteBooks %}
+		<tbody>
+		<tr>
+			<td rowspan="2"><a href= "{% url 'books:login_user_view' book.bid %}">{{ book.title }}</a></td>
+			<td>{{ book.author }}</td>
+			<td>{{ book.category }}</td>
+			<td>{{ book.genre }}</td>
+			<td>{{ book.votes }}</td>
+			<td>{{ book.hits }}</td>
+			<td>{{ book.wordcount }}</td>
+			<td>{{ book.date_updated }}</td>
+			<td>{{ book.status }}</td>
+			<td>
+				<form action="{% url 'users:deleteFavourite' book.bid %}" method="POST">
+					{% csrf_token %}
+					<input type="submit" class= "btn btn-info" value="Delete!">
+				</form>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="8"><i>
+			{% if book.abstract %} 
+				{{ book.abstract }} 
+			{% else %}
+				No description. 
+			{% endif %}</i>
+			</td>
+		</tr>
+		</tbody>
+		{% endfor %}	
+	</table>
+	{% else %}
+		<p>You have not added any favourites yet!</p>
+	{% endif %}
+	
+{% endblock %}

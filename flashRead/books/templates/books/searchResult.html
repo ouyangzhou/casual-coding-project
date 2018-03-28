@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/booklist.css' %}" />
+	<!--<link rel="stylesheet" type="text/css" href="/static/css/booklist.css">-->
+{% endblock extra_css %}
+
+{% block body_block %}
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+	<img id="searchresults" src ="{% static 'images/searchresults.gif' %}" >
+	
+	{% if book_list %}
+	<table class = "table" id="bookTable">
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Author</th> 
+			<th>Category</th>
+			<th>Genre</th>
+			<th>Rating</th>
+			<th>Hits</th>
+			<th>Word Count</th>
+			<th>Last Updated</th>
+		</tr>
+	</thead>
+		{% for book in book_list %}
+		<tbody>
+		<tr>
+			<td rowspan="2"><a href= "{% url 'books:login_user_view' book.bid %}">{{ book.title }}</a></td>
+			<td>{{ book.author }}</td>
+			<td>{{ book.category }}</td>
+			<td>{{ book.genre }}</td>
+			<td>{{ book.votes }}</td>
+			<td>{{ book.hits }}</td>
+			<td>{{ book.wordcount }}</td>
+			<td>{{ book.date_updated }}</td>
+		</tr>
+		<tr>
+			<td colspan="7"><i>
+			{% if book.abstract %} 
+				{{ book.abstract }} 
+			{% else %}
+				No description. 
+			{% endif %}</i>
+			</td>
+		</tr>
+		</tbody>
+		{% endfor %}	
+	</table>
+	{% else %}
+		<p>No matching books!</p>
+	{% endif %}
+
+	<p><a href='../'>Back to book list</a></p>
+	<p><a href='../goToAdvSearch'>Advanced Seach</a></p>
+{% endblock body_block %}
+	
+	
+	

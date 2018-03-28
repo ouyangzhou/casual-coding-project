@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+
+
+{% block extra_css %}
+	<link rel="stylesheet" type="text/css" href="/static/css/chapters/main.css">
+{% endblock extra_css %}
+
+
+
+{% block body_block %}
+
+	<h1>Chapter {{ chapter.chapter_number }}: {{ chapter.title }}</h1>
+	<ul id='prevandnext'>
+	{% if content %}
+			{% for line in content %}
+				<p>{{ line }}</p>
+			{% endfor %}
+	{% else %}
+		<p>No contents.. yet! </p>
+	{% endif %}
+	
+	<p>
+	{% ifequal previous 0 %}
+		
+	{% else %}
+		<li><a href='../{{ previous }}/' class="btn btn-info"><span class="glyphicon glyphicon-circle-arrow-left"></span> Previous Chapter</a></li>
+	{% endifequal %}
+	
+	{% ifequal next 0 %}
+		
+	{% else %}
+		<li><a href='../{{ next }}/' class="btn btn-info">Next Chapter <span class="glyphicon glyphicon-circle-arrow-right"></span></a></li>
+	{% endifequal %}
+	</p>
+	
+	<form action="{% url 'chapters:bookmark' chapter.pk%}" method="POST">
+		{% csrf_token %}
+		<input type="submit" class= "btn btn-info" value="Bookmark this chapter!">
+	</form>
+	<p><a href='../../books/{{ bookId }}/'>Back to Chapter Index</a></p>
+	
+	</ul>
+
+	{% if login %}
+		<p><form method = "POST"> {% csrf_token %}
+		<fieldset>
+		<div class = "rows">
+		<div class = "col-xs-4">
+		Post A Comment: <br>
+		<textarea cols="50" rows="6" class = "form-control" name="content"></textarea><br>
+		<input type="submit" class= "btn btn-info" value="Add Comment">
+		</div>
+		</div>
+		</fieldset>
+		</form></p>
+	{% endif %}
+	{% if commentList %}
+		<h3>Comments:</h3>
+		{% for comment in commentList %}
+				<p>On {{ comment.date_updated }} {{ comment.commentor }} said: <br/> 
+					{{ comment.content }}</p>
+		{% endfor %}
+	{% endif %}
+
+{% endblock body_block %}
+	
+	
+	

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_block %}
+<p><img src ="{% static 'images/myprofile.gif' %}" ></p>
+
+<div class = "row">
+	<div class="col-xs-2">
+	<table class ="table table-striped" placeholder=".col-xs-2">
+		<tbody>
+			<tr>
+				<td><strong>Username: </strong></td>
+				<td>{{ user.username }}</td>
+			</tr>
+			
+			<tr>
+				<td><strong>Email: </strong></td>
+				<td>{{ user.email }}</td>
+			</tr>
+		
+			<tr>
+				<td><strong>Gender: </strong></td>
+				<td>{{ user.profile.gender }}</td>
+			</tr>
+		
+			<tr>
+				<td><strong>About: </strong></td>
+				<td>{{ user.profile.about }}</td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+</div>
+	{% for field in form %}
+		{{field.error}}
+	{% endfor %}
+	
+	
+	{% csrf_token %}
+	{{ form.as_table }}
+	
+	<a href="{% url 'users:edit_profile' %}" class= "btn btn-info">Edit Profile</a>
+	
+	
+	
+{% endblock %}

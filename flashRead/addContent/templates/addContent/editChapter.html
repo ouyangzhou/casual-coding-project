@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/addContent.css' %}" />
+{% endblock extra_css %}
+
+{% block body_block %}
+
+<h1>Editing "{{ chapter.title }}" in "{{ book.title }}"</h1>
+
+<p><form method = "POST" style="width:800px"> {% csrf_token %}
+ <fieldset>
+  <div class ="row">
+  <div class="col-xs-4">
+  Title: <br>
+  <input type="text" class = "form-control" name="title" value="{{ chapter.title }}" required><br>
+  Chapter Number: <br>
+  <input type="text" class = "form-control" name="chapter_number" value="{{ chapter.chapter_number }}" required><br>
+  </div>
+  </div>
+  
+  <div class ="row">
+  <div class="col-xs-12">
+  Content: <br>
+  <textarea cols="150" rows="35" class = "form-control" name="content">{{ data }}</textarea><br>
+  </div>
+  </div>
+  <input name="editChapter" type="submit" class= "btn btn-info" value="Save Changes"> <input id="deleteBtn" name="deleteChapter" type="submit" class= "btn btn-danger" value="Delete Chapter" style="float:right" onclick="return confirm('Are you sure you want to delete this chapter?')">
+ </fieldset>
+</form></p>
+
+<p><a href="{% url 'addContent:editBook' book.bid %}">Back to Book Index</a></p>
+<p><a href="{% url 'addContent:myWorks' %}">Back to My Works</a></p>
+
+{% endblock %}

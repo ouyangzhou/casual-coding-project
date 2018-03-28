@@ -1,0 +1,60 @@
+#content form { margin: 0 20px; position: relative }
+#content form input[type="text"],
+#content form input[type="email"],
+#content form input[type="password"] {
+	-webkit-box-shadow: 0 1px 0 #fff, 0 -2px 5px rgba(0,0,0,0.08) inset;
+	-moz-box-shadow: 0 1px 0 #fff, 0 -2px 5px rgba(0,0,0,0.08) inset;
+	-ms-box-shadow: 0 1px 0 #fff, 0 -2px 5px rgba(0,0,0,0.08) inset;
+	-o-box-shadow: 0 1px 0 #fff, 0 -2px 5px rgba(0,0,0,0.08) inset;
+	background: #eae7e7;
+	border: 1px solid #c8c8c8;
+	font: 15px Cambria, Georgia, serif;
+	margin: 0 0 5px;
+	padding: 10px 5px 10px 10px;
+	width: 300px;
+}
+
+#content form input[type="submit"] {
+	background: -moz-linear-gradient(#AF2AB6, #E4AEF8);
+    background: -ms-linear-gradient(#AF2AB6, #E4AEF8);
+    background: -o-linear-gradient(#AF2AB6, #E4AEF8);
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(#AF2AB6), to(#E4AEF8));
+    background: -webkit-linear-gradient(#AF2AB6, #E4AEF8);
+    background: linear-gradient(#AF2AB6, #E4AEF8);
+    border: 1px solid #f4ab4c;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	-ms-border-radius: 30px;
+	-o-border-radius: 30px;
+	border: 1px solid #B45BD7;
+	color: #6D1572;
+	font: bold 15px Cambria, Georgia, serif;
+	height: 30px;
+	position: relative;
+	margin: 0 10px 5px 6%;
+	text-shadow: 0 2px 0 rgba(255,255,255,0.5);
+	width: 200px;
+}
+
+ul {
+	list-style-type: none;
+}
+
+#content {
+	margin: 2cm 0 0 0;
+	text-align: center;
+}
+
+#content a{
+	text-align: center;
+	margin: 0 10px 5px 6%;
+}
+
+table.center {
+	margin-left:auto; 
+	margin-right:auto;
+}
+
+table {
+	text-align: left;
+}

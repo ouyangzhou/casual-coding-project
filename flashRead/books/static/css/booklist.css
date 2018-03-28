@@ -1,0 +1,66 @@
+body {
+   background-image: url("http://www.michaelgiza.com/artpix/BookFull.jpg");
+   background-repeat: no-repeat; 
+   background-attachment: fixed;
+   background-position: center;
+   background-size: 1300px 600px;
+
+}
+
+ul {
+	text-align: left;
+	margin-top: 50px;
+ 	margin-left: 30px;
+	list-style-type: none;
+}
+
+p {
+	text-align: left;
+	margin-top: 50px;
+ 	margin-left: 65px;
+}
+
+h2 {
+  color: purple;
+  text-align: left;
+  font-size: 200%;
+	margin-left: 115px;
+  text-color: purple;
+  font-family: 'Book Antiqua', Palatino, 'Palatino Linotype', 'Palatino LT STD', Georgia, serif;
+}
+
+img#searchresults{
+	padding-top:30px;
+	padding-bottom: 30px;
+}
+
+img#booksheader{
+	padding-bottom: 20px;
+}
+
+/*
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 5px;
+  text-align: left;
+}
+*/
+table#bookTable {
+  width: 80%;
+  margin-right: auto;
+  /*margin-left: auto;*/
+}
+
+table#bookTable th {
+  background-color: purple;
+  color: white;
+  padding: 5px;
+}
+
+table#bookTable tr {
+  background-color:#fff;
+}

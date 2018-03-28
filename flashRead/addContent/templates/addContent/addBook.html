@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block body_block %}
+
+<h1><img src ="{% static 'images/addnewwork.gif' %}" ></img></h1>
+
+<p><form method = "POST"> {% csrf_token %}
+ <fieldset>
+  <div class = "row">
+  <div class="col-xs-2">
+  Title: <br>
+  <input type="text" class = "form-control" name="title" required><br><br>
+  Genre: <br>
+  <select class = "form-control" placeholder="Genre" name="genre" required>
+  <option value="Classic">Classic</option>
+  <option value="Adventure">Adventure</option>
+  <option value="Fantasy">Fantasy</option>
+  <option value="Romance">Romance</option>
+  <option value="Sci-fi">Sci-fi</option>
+  <option value="Drama">Drama</option>
+  <option value="Satire">Satire</option>
+  <option value="Mystery">Mystery</option>
+  <option value="Horror">Horror</option>
+  <option value="Guide">Guide</option>
+  <option value="Autobiography">Autobiography</option>
+  <option value="Other">Other</option>
+  </select><br>
+  Category: <br>
+  <select class = "form-control" placeholder="Category" name="category" required>
+  <option value="Original">Original</option>
+  <option value="Fan-work">Fan-work</option>
+  <option value="Poem">Poem</option>
+  <option value="Diary">Diary</option>
+  <option value="Short-story">Short-story</option>
+  <option value="Textbook">Textbook</option>
+  <option value="Other">Other</option>
+  </select><br>
+  Status: <br>
+  <select class = "form-control" placeholder="Status" name="status" required>
+  <option value="Incomplete">Incomplete</option>
+  <option value="Complete">Complete</option>
+  <option value="Hiatus">Hiatus</option>
+  <option value="Abandoned">Abandoned</option>
+  </select><br>
+  </div>
+  </div>
+   <div class = "row">
+  <div class="col-xs-5">
+  Abstract: <br>
+  <textarea cols="68" rows="4" class = "form-control" name="abstract"></textarea><br>
+  <input type="submit" class="btn btn-info" value="Add Work">
+  </div>
+  </div>
+ </fieldset>
+</form></p>
+
+<p><a href="{% url 'addContent:myWorks' %}">Back to My Works</a></p>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block body_block %}
+
+<h1>{{ userid.username }}'s Works</h1>
+
+{% if bookList %}
+
+<h3>Click to edit: </h3>
+	<ul>
+	{% for book in bookList %}
+		<li><a href="{% url 'addContent:editBook' book.bid  %}">{{ book.title }}</a> &nbsp; <i>Last updated: {{ book.date_updated }}</i></li>
+	{% endfor %}
+	</ul>
+{% else %}
+	<p>No work written so far.<p>
+{% endif %}
+
+<p><a href="{% url 'addContent:addBook' %}" class= "btn btn-info">Add new work</a></p>
+<p><a href="/">Home Page</a></p>
+
+{% endblock %}
